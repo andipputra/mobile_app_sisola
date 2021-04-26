@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MenuLayanan extends Equatable {
-  final FaIcon icon;
+  final String icon;
   final String name;
   final String route;
 

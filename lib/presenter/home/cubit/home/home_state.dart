@@ -14,11 +14,12 @@ class HomeLoading extends HomeState{}
 class HomeLoaded extends HomeState {
   final List<Artikel> artikel;
   final List<Promo> promo;
+  final List<Produk> produk;
 
-  HomeLoaded(this.artikel, this.promo);
+  HomeLoaded({required this.artikel, required this.promo, required this.produk});
 
   @override
-  List<Object> get props => [artikel, promo];
+  List<Object> get props => [artikel, promo, produk];
 }
 
 class HomeFailure extends HomeState {

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_sisola/presenter/home/view/home_page.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 // class MainPage extends StatefulWidget {
 //   @override
@@ -90,13 +89,11 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _i = 0;
 
   final PageController _myPage = PageController(initialPage: 0);
 
   void tappedBotnav(int index) {
     setState(() {
-      _i = index;
     });
   }
 
