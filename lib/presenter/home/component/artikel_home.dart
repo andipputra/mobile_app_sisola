@@ -14,10 +14,9 @@ class HomeArtikel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 8, bottom: 4),
-          child:
-              Text('Artikel', style: Theme.of(context).textTheme.subtitle1),
-        ),
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+            child: Text('Artikel', style: TextStyle(color: Colors.black87, fontSize: 22, fontWeight: FontWeight.bold)),
+          ),
         Container(
           height: size.height * 0.2,
           child: ListView.builder(

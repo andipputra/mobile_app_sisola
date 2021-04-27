@@ -5,6 +5,7 @@ import 'package:mobile_app_sisola/presenter/auth/auth.dart';
 import 'package:mobile_app_sisola/presenter/home/view/home_page.dart';
 import 'package:mobile_app_sisola/utils/dialog/bottomsheet_container.dart';
 import 'package:mobile_app_sisola/utils/dialog/content/unauthenticated.dart';
+import 'package:mobile_app_sisola/utils/widget/header_bar.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -40,6 +41,17 @@ class _MainPageState extends State<MainPage> {
         }
       },
       child: Scaffold(
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            // backgroundColor: Colors.transparent,
+            // shadowColor: Colors.transparent,
+            // title: HeaderBar(),
+            elevation: 0,
+            centerTitle: true,
+            title: HeaderBar(),
+            backgroundColor: Colors.white12
+            // flexibleSpace: HeaderAssets().headerDecoration,
+            ),
         body: SafeArea(
           child: PageView(
             controller: _myPage,
@@ -54,8 +66,14 @@ class _MainPageState extends State<MainPage> {
               });
             });
           },
-          tooltip: 'Increment',
-          elevation: 4.0,
+          backgroundColor: Colors.blue,
+          elevation: 0.0,
+          shape: CircleBorder(
+            side: BorderSide(
+              width: 2.0,
+              color: Colors.white,
+            ),
+          ),
           child: ImageIcon(
             AssetImage('assets/images/logo/calculator.png'),
             size: 24,
@@ -63,6 +81,9 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          color: Colors.blue,
+          notchMargin: 4,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -71,7 +92,7 @@ class _MainPageState extends State<MainPage> {
                   icon: ImageIcon(
                     AssetImage('assets/images/logo/home.png'),
                     size: 24,
-                    color: Colors.blue,
+                    color: Colors.white,
                   ),
                   onPressed: () {
                     setState(() {
@@ -85,7 +106,7 @@ class _MainPageState extends State<MainPage> {
                   icon: ImageIcon(
                     AssetImage('assets/images/logo/contract.png'),
                     size: 24,
-                    color: Colors.blue,
+                    color: Colors.white,
                   ),
                   onPressed: () async {
                     if (_isAuth) {
@@ -105,7 +126,7 @@ class _MainPageState extends State<MainPage> {
                   icon: ImageIcon(
                     AssetImage('assets/images/logo/head_phone.png'),
                     size: 24,
-                    color: Colors.blue,
+                    color: Colors.white,
                   ),
                   onPressed: () {
                     setState(() {
@@ -119,7 +140,7 @@ class _MainPageState extends State<MainPage> {
                   icon: ImageIcon(
                     AssetImage('assets/images/logo/people.png'),
                     size: 24,
-                    color: Colors.blue,
+                    color: Colors.white,
                   ),
                   onPressed: () {
                     if (_isAuth) {

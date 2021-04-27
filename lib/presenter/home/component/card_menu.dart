@@ -41,48 +41,57 @@ class _CardMenuState extends State<CardMenu> {
     void accessMenu() {
       print('tapped menu');
 
-      if(widget.isLogin){
+      if (widget.isLogin) {
         return BottomSheetContainer(context).showDialog(Container(
-            child: Text('Login'),
-          ));
+          child: Text('Login'),
+        ));
       } else {
         return BottomSheetContainer(context).showDialog(UnAuthenticated());
       }
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Layanan', style: Theme.of(context).textTheme.subtitle1),
-          GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: _menu.length,
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-              itemBuilder: (context, index) {
-                return TextButton(
-                  onPressed: () {
-                    accessMenu();
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ImageIcon(
-                        AssetImage(_menu[index].icon),
-                        size: 36,
-                        color: Colors.blue,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4.0, left: 16),
+            child: Text('Layanan', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+          ),
+          Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 2,
+            child: Container(
+              child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: _menu.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4),
+                  itemBuilder: (context, index) {
+                    return TextButton(
+                      onPressed: () {
+                        accessMenu();
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ImageIcon(
+                            AssetImage(_menu[index].icon),
+                            size: 36,
+                            color: Colors.blue,
+                          ),
+                          Text(_menu[index].name,
+                              style: Theme.of(context).textTheme.caption,
+                              textAlign: TextAlign.center)
+                        ],
                       ),
-                      Text(_menu[index].name,
-                          style: Theme.of(context).textTheme.caption,
-                          textAlign: TextAlign.center)
-                    ],
-                  ),
-                );
-              }),
+                    );
+                  }),
+            ),
+          ),
         ],
       ),
     );

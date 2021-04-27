@@ -11,7 +11,8 @@ class HomePromo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 24),
+      color: Colors.transparent,
+      padding: EdgeInsets.symmetric(vertical: 16),
       child: AspectRatio(
         aspectRatio: 14 / 5,
         child: Container(
@@ -23,7 +24,6 @@ class HomePromo extends StatelessWidget {
                 items: listPromo!
                     .map(
                       (e) => Card(
-                          color: Colors.blue,
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16.0),

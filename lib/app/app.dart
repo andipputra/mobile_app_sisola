@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_app_sisola/presenter/main/view/m_page.dart';
 import 'package:mobile_app_sisola/presenter/main/view/main_page.dart';
 
 class App extends StatelessWidget {
@@ -19,8 +20,9 @@ class App extends StatelessWidget {
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
           primarySwatch: Colors.blue,
-          textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme)),
-      home: MainPage()
+          textTheme: GoogleFonts.openSansTextTheme(Theme.of(context).textTheme)),
+      home: MainPage ()
+      // home: MPage(),
       
       // BlocBuilder<AuthBloc, AuthState>(
       //   builder: (context, state) {
