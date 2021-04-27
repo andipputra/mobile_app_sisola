@@ -17,20 +17,18 @@ void main() {
 
   runZonedGuarded(
       () => runApp(RepositoryProvider<AuthRepository>(
-        create: (context) {
-          return AuthRepository();
-          // final authRepo = RepositoryProvider.of<AuthRepository>(context);
-          // return AuthBloc(authRepo)..add(AppLoaded());
-        },
-        child: BlocProvider<AuthBloc>(
-          create: (context) {
-            // return AuthRepository();
-            final authRepo = RepositoryProvider.of<AuthRepository>(context);
-            return AuthBloc(authRepo)..add(AppLoaded());
-          },
-          child: App(),
-        ),
-      )),
+            create: (context) {
+              return AuthRepository();
+            },
+            child: BlocProvider<AuthBloc>(
+                create: (context) {
+                  // return AuthRepository();
+                  final authRepo =
+                      RepositoryProvider.of<AuthRepository>(context);
+                  return AuthBloc(authRepo)..add(AppLoaded());
+                },
+                child: App()),
+          )),
       (error, stackTrace) => log(error.toString(), stackTrace: stackTrace));
 }
 

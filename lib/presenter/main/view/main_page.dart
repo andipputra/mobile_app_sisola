@@ -1,87 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_app_sisola/presenter/auth/auth.dart';
 import 'package:mobile_app_sisola/presenter/home/view/home_page.dart';
-
-// class MainPage extends StatefulWidget {
-//   @override
-//   _MainPageState createState() => _MainPageState();
-// }
-
-// class _MainPageState extends State<MainPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-
-//     );
-//   }
-// }
-
-// class MainPage extends StatelessWidget {
-//   final PersistentTabController _controller = PersistentTabController();
-
-//   List<Widget> _buildScreens() {
-//     return [
-//       MainPage(),
-//       Container(
-//         child: Text('4'),
-//       ),
-//     ];
-//   }
-
-//   List<PersistentBottomNavBarItem> _navBarsItems() {
-//     return [
-//       PersistentBottomNavBarItem(
-//         icon: Icon(CupertinoIcons.home),
-//         title: ('Home'),
-//         activeColorPrimary: CupertinoColors.activeBlue,
-//         inactiveColorPrimary: CupertinoColors.systemGrey,
-//       ),
-//       PersistentBottomNavBarItem(
-//         icon: Icon(CupertinoIcons.settings),
-//         title: ('Settings'),
-//         activeColorPrimary: CupertinoColors.activeBlue,
-//         inactiveColorPrimary: CupertinoColors.systemGrey,
-//       ),
-//     ];
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return PersistentTabView(
-//       context,
-//       controller: _controller,
-//       screens: _buildScreens(),
-//       items: _navBarsItems(),
-//       confineInSafeArea: true,
-//       backgroundColor: Colors.white, // Default is Colors.white.
-//       handleAndroidBackButtonPress: true, // Default is true.
-//       resizeToAvoidBottomInset:
-//           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-//       stateManagement: true, // Default is true.
-//       hideNavigationBarWhenKeyboardShows:
-//           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-//       decoration: NavBarDecoration(
-//         borderRadius: BorderRadius.circular(10.0),
-//         colorBehindNavBar: Colors.white,
-//       ),
-//       popAllScreensOnTapOfSelectedTab: true,
-//       popActionScreens: PopActionScreensType.all,
-//       itemAnimationProperties: ItemAnimationProperties(
-//         // Navigation Bar's items animation properties.
-//         duration: Duration(milliseconds: 200),
-//         curve: Curves.ease,
-//       ),
-//       screenTransitionAnimation: ScreenTransitionAnimation(
-//         // Screen transition animation on change of selected tab.
-//         animateTabTransition: true,
-//         curve: Curves.ease,
-//         duration: Duration(milliseconds: 200),
-//       ),
-//       navBarStyle:
-//           NavBarStyle.style1, // Choose the nav bar style with this property.
-//     );
-//   }
-// }
+import 'package:mobile_app_sisola/utils/dialog/bottomsheet_container.dart';
+import 'package:mobile_app_sisola/utils/dialog/content/unauthenticated.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -89,110 +12,132 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
   final PageController _myPage = PageController(initialPage: 0);
 
-  void tappedBotnav(int index) {
-    setState(() {
-    });
-  }
-
-  final _page = <Widget>[
-    HomePage(),
-    Container(
-      child: Text('2'),
-    ),
-    Container(
-      child: Text('3'),
-    ),
-    Container(
-      child: Text('4'),
-    ),
-  ];
+  var _isAuth = false;
 
   @override
   Widget build(Object context) {
-    return Scaffold(
-      body: SafeArea(
-        child: PageView(
-          controller: _myPage,
-          children: _page,
+    final _page = <Widget>[
+      HomePage(
+        isLogin: _isAuth,
+      ),
+      Container(
+        child: Text('2'),
+      ),
+      Container(
+        child: Text('3'),
+      ),
+      Container(
+        child: Text('4'),
+      ),
+    ];
+
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthAuthenticated) {
+          _isAuth = true;
+        }
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: PageView(
+            controller: _myPage,
+            children: _page,
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _myPage.jumpToPage(2);
-          });
-        },
-        tooltip: 'Increment',
-        elevation: 4.0,
-        child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: IconButton(
-                icon: Icon(Icons.home),
-                onPressed: () {
-                  setState(() {
-                    _myPage.jumpToPage(0);
-                  });
-                },
-              ),
-            ),
-            Expanded(
-              child: IconButton(
-                icon: Icon(Icons.show_chart),
-                onPressed: () {
-                  setState(() {
-                    _myPage.jumpToPage(1);
-                  });
-                },
-              ),
-            ),
-            Expanded(child: Text('')),
-            Expanded(
-              child: IconButton(
-                icon: Icon(Icons.tab),
-                onPressed: () {
-                  setState(() {
-                    _myPage.jumpToPage(3);
-                  });
-                },
-              ),
-            ),
-            Expanded(
-              child: IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () {
-                  setState(() {
-                    _myPage.jumpToPage(4);
-                  });
-                },
-              ),
-            ),
-          ],
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              setState(() {
+                _myPage.jumpToPage(2);
+              });
+            });
+          },
+          tooltip: 'Increment',
+          elevation: 4.0,
+          child: ImageIcon(
+            AssetImage('assets/images/logo/calculator.png'),
+            size: 24,
+            color: Colors.white,
+          ),
         ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: IconButton(
+                  icon: ImageIcon(
+                    AssetImage('assets/images/logo/home.png'),
+                    size: 24,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _myPage.jumpToPage(0);
+                    });
+                  },
+                ),
+              ),
+              Expanded(
+                child: IconButton(
+                  icon: ImageIcon(
+                    AssetImage('assets/images/logo/contract.png'),
+                    size: 24,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () async {
+                    if (_isAuth) {
+                      setState(() {
+                        _myPage.jumpToPage(1);
+                      });
+                    } else {
+                      return BottomSheetContainer(this.context)
+                          .showDialog(UnAuthenticated());
+                    }
+                  },
+                ),
+              ),
+              Spacer(),
+              Expanded(
+                child: IconButton(
+                  icon: ImageIcon(
+                    AssetImage('assets/images/logo/head_phone.png'),
+                    size: 24,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _myPage.jumpToPage(3);
+                    });
+                  },
+                ),
+              ),
+              Expanded(
+                child: IconButton(
+                  icon: ImageIcon(
+                    AssetImage('assets/images/logo/people.png'),
+                    size: 24,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                    if (_isAuth) {
+                      setState(() {
+                        _myPage.jumpToPage(4);
+                      });
+                    } else {
+                      return BottomSheetContainer(this.context)
+                          .showDialog(UnAuthenticated());
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // bottomNavigationBar: BottomNavigationBar(
-      //   onTap: tappedBotnav,
-      //   currentIndex: _i,
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.mail),
-      //       label: 'Message',
-      //     ),
-      //     BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil')
-      //   ],
-      // ),
     );
   }
 }

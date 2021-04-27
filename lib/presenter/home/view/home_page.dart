@@ -5,7 +5,16 @@ import 'package:mobile_app_sisola/presenter/home/component/home_component.dart';
 import 'package:mobile_app_sisola/presenter/home/cubit/home/home_cubit.dart';
 import 'package:mobile_app_sisola/utils/style/color_style.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  final bool isLogin;
+
+  HomePage({required this.isLogin});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -53,8 +62,12 @@ class HomePage extends StatelessWidget {
                                   controller: scrollController,
                                   child: Column(
                                     children: [
-                                      CardMenu(),
-                                      HomeProduk(listProduk: state.produk,),
+                                      CardMenu(
+                                        isLogin: widget.isLogin,
+                                      ),
+                                      HomeProduk(
+                                        listProduk: state.produk,
+                                      ),
                                       HomeArtikel(
                                         listArtikel: state.artikel,
                                       )

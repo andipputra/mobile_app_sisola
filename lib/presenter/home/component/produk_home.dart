@@ -13,8 +13,8 @@ class HomeProduk extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16.0),
-          child: Text('Produk', style: Theme.of(context).textTheme.headline6),
+          padding: const EdgeInsets.only(left: 16.0, top: 4, bottom: 4),
+          child: Text('Produk', style: Theme.of(context).textTheme.subtitle1),
         ),
         Container(
           color: Colors.blue,

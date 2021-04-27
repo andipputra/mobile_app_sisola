@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app_sisola/model/data/data.dart';
-import 'package:mobile_app_sisola/presenter/auth/auth.dart';
 import 'package:mobile_app_sisola/utils/dialog/bottomsheet_container.dart';
 import 'package:mobile_app_sisola/utils/dialog/content/unauthenticated.dart';
 
-class CardMenu extends StatelessWidget {
+class CardMenu extends StatefulWidget {
+  final bool isLogin;
+
+  CardMenu({required this.isLogin});
+
+  @override
+  _CardMenuState createState() => _CardMenuState();
+}
+
+class _CardMenuState extends State<CardMenu> {
   final List<MenuLayanan> _menu = [
     MenuLayanan(
         icon: 'assets/images/logo/bpkb.png',
@@ -29,30 +36,26 @@ class CardMenu extends StatelessWidget {
         route: '/bpkb'),
   ];
 
-  void accessMenu() {
-    print('tapped menu');
+  @override
+  Widget build(BuildContext context) {
+    void accessMenu() {
+      print('tapped menu');
 
-    BlocListener<AuthBloc, AuthState>(listener: (context, state) {
-      print('State is $state');
-
-      if (state is AuthAuthenticated) {
+      if(widget.isLogin){
         return BottomSheetContainer(context).showDialog(Container(
-          child: Text('Login'),
-        ));
+            child: Text('Login'),
+          ));
       } else {
         return BottomSheetContainer(context).showDialog(UnAuthenticated());
       }
-    });
-  }
+    }
 
-  @override
-  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Layanan', style: Theme.of(context).textTheme.bodyText1),
+          Text('Layanan', style: Theme.of(context).textTheme.subtitle1),
           GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -79,42 +82,6 @@ class CardMenu extends StatelessWidget {
                     ],
                   ),
                 );
-
-                // return TextButton(
-                //   onPressed: () {
-                //     print('State is $AuthState');
-
-                //     BlocListener<AuthBloc, AuthState>(
-                //         listener: (context, state) {
-                //       print('State is $state');
-
-                //       if (state is AuthAuthenticated) {
-                //         return BottomSheetContainer(context)
-                //             .showDialog(Container(
-                //           child: Text('Login'),
-                //         ));
-                //       } else {
-                //         return BottomSheetContainer(context)
-                //             .showDialog(UnAuthenticated());
-                //       }
-                //     });
-                //   },
-                //   child: Column(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: [
-                //       Image.asset(
-                //         _menu[index].icon,
-                //         fit: BoxFit.fitHeight,
-                //       ),
-                //       Text(
-                //         _menu[index].name,
-                //         textAlign: TextAlign.center,
-                //         style: Theme.of(context).textTheme.overline,
-                //       )
-                //     ],
-                //   ),
-                // );
               }),
         ],
       ),

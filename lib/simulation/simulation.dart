@@ -1,0 +1,1 @@
+export './view/simulation_page.dart';
