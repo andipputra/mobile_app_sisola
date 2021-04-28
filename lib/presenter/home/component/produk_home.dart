@@ -26,60 +26,62 @@ class HomeProduk extends StatelessWidget {
               //       CostumColor.gradientBegin,
               //       CostumColor.gradientEnd,
               //     ])),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                //   child: Text('Produk',
-                //       style: TextStyle(
-                //           color: Colors.white,
-                //           fontSize: 22,
-                //           fontWeight: FontWeight.bold)),
-                // ),
-                Container(
-                  height: size.height * 0.15,
-                  child: GridView.builder(
-                      itemCount: listProduk!.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1),
-                      itemBuilder: (context, idx) => Container(
-                            margin: EdgeInsets.symmetric(horizontal: 4),
-                            child: Wrap(
-                              children: [
-                                // Card(
-                                //     // color: Colors.blue,
-                                //     clipBehavior: Clip.antiAliasWithSaveLayer,
-                                //     shape: RoundedRectangleBorder(
-                                //       borderRadius: BorderRadius.circular(16.0),
-                                //     ),
-                                //     child: Padding(
-                                //       padding: const EdgeInsets.all(8.0),
-                                //       child: Image.network(
-                                //         listProduk![idx].images!,
-                                //         fit: BoxFit.fitHeight,
-                                //       ),
-                                //     )),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                  child: Image.network(
-                                    listProduk![idx].images!,
-                                    fit: BoxFit.fitHeight,
-                                  ),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                    //   child: Text('Produk',
+                    //       style: TextStyle(
+                    //           color: Colors.white,
+                    //           fontSize: 22,
+                    //           fontWeight: FontWeight.bold)),
+                    // ),
+                    Container(
+                      height: size.height * 0.15,
+                      child: GridView.builder(
+                          itemCount: listProduk!.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1),
+                          itemBuilder: (context, idx) => Container(
+                                margin: EdgeInsets.symmetric(horizontal: 4),
+                                child: Wrap(
+                                  children: [
+                                    // Card(
+                                    //     // color: Colors.blue,
+                                    //     clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    //     shape: RoundedRectangleBorder(
+                                    //       borderRadius: BorderRadius.circular(16.0),
+                                    //     ),
+                                    //     child: Padding(
+                                    //       padding: const EdgeInsets.all(8.0),
+                                    //       child: Image.network(
+                                    //         listProduk![idx].images!,
+                                    //         fit: BoxFit.fitHeight,
+                                    //       ),
+                                    //     )),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0),
+                                      child: Image.network(
+                                        listProduk![idx].images!,
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                                    ),
+                                    Text(
+                                      listProduk![idx].title!,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.black87, fontSize: 12),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  listProduk![idx].title!,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: 12
-                                  ),
-                                )
-                              ],
-                            ),
-                          )),
-                ),
-              ])),
+                              )),
+                    ),
+                  ])),
         ],
       ),
     );
